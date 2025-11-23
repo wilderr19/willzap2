@@ -6,7 +6,20 @@ import (
 )
 func main() {
         listenAddr := ":" + os.Getenv("PORT")
-        targetAddr := os.Getenv("V2RAY_SERVER_IP") + ":80"
+        
+        // Obtener host destino (DHOST o V2RAY_SERVER_IP como fallback)
+        targetHost := os.Getenv("DHOST")
+        if targetHost == "" {
+                targetHost = os.Getenv("V2RAY_SERVER_IP")
+        }
+        
+        // Obtener puerto destino (DPORT o 80 por defecto)
+        targetPort := os.Getenv("DPORT")
+        if targetPort == "" {
+                targetPort = "80"
+        }
+        
+        targetAddr := targetHost + ":" + targetPort
         ln, err := net.Listen("tcp", listenAddr)
         if err != nil {
                 return
