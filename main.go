@@ -13,10 +13,10 @@ func main() {
                 targetHost = os.Getenv("V2RAY_SERVER_IP")
         }
         
-        // Obtener puerto destino (DPORT o 80 por defecto)
+        // Obtener puerto destino (DPORT o 443 por defecto para v2ray)
         targetPort := os.Getenv("DPORT")
         if targetPort == "" {
-                targetPort = "80"
+                targetPort = "443"
         }
         
         targetAddr := targetHost + ":" + targetPort
